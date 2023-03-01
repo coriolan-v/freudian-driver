@@ -1,7 +1,11 @@
+// ARDUINO MICRO
+
+#define   redPin    A0   
+#define   bluePin   A1  
 #define   enPin     5   // the number of the En pin
 #define   stpPin    6   // the number of the Stp pin
 #define   dirPin    7   // the number of the Dir pin
-
+ 
 /**************************************************************
 ***  connect:
       D5---En (Select L or Hold for the En option on the screen of the closed-loop driver board)
@@ -24,13 +28,23 @@ long i = 0, j = 0;  bool cntDir = false;
 void setup() {
   // put your setup code here, to run once:
 
+
   pinMode(enPin , OUTPUT);  digitalWrite(enPin , LOW);  // initialize the En pin as an output
   pinMode(stpPin, OUTPUT);  digitalWrite(stpPin, LOW);  // initialize the Stp pin as an output
   pinMode(dirPin, OUTPUT);  digitalWrite(dirPin, LOW);  // initialize the Dir pin as an output
+
+  pinMode(redPin, INPUT);
+  pinMode(bluePin, INPUT);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+ //driveStepper();
+ readInputPins();
+}
+
+void driveStepper()
+{
+ // put your main code here, to run repeatedly:
 
   /**********************************************************
   ***  The time interval between high and low levels, that is,
@@ -64,4 +78,13 @@ void loop() {
   {
     digitalWrite(dirPin, LOW);  cntDir = false;   delay(1000);  //Switch direction rotation
   }
+}
+
+
+void readInputPins()
+{
+  Serial.print("Red: "); Serial.print(analogRead(redPin));
+  Serial.print(" Blue: "); Serial.print(analogRead(bluePin));
+  Serial.println();
+  delay(100);
 }

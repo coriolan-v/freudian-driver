@@ -9,7 +9,7 @@
 
 Adafruit_NeoPixel pixels(NUMPIXELS, PIN, NEO_GRB);
 
-#define DELAYVAL 10000 // Time (in milliseconds) to pause between pixels
+#define DELAYVAL 3000 // Time (in milliseconds) to pause between pixels
 
 void setup() {
 #if defined(__AVR_ATtiny85__) && (F_CPU == 16000000)
@@ -26,21 +26,21 @@ void loop() {
 
   for (int i = 0; i < NUMPIXELS; i++)
   { // For each pixel...
-    pixels.setPixelColor(i, pixels.Color(255, 0, 0));
+    pixels.setPixelColor(i, pixels.Color(0, 0, 0));
     pixels.show();   // Send the updated pixel colors to the hardware.
   }
 
-  Serial.println("pixels.Color(255, 0, 0)");
+  Serial.println("pixels.Color(0, 0, 0)");
 
   delay(DELAYVAL); // Pause before next pass through loop
 
   for (int i = 0; i < NUMPIXELS; i++)
   { // For each pixel...
-    pixels.setPixelColor(i, pixels.Color(0, 255, 0));
+    pixels.setPixelColor(i, pixels.Color(255, 255, 255));
     pixels.show();   // Send the updated pixel colors to the hardware.
   }
 
-  Serial.println("pixels.Color(255, 0, 0)");
+  Serial.println("pixels.Color(255, 255, 255));");
 
   delay(DELAYVAL); // Pause before next pass through loop
 }
