@@ -1,10 +1,13 @@
 // ARDUINO MICRO
 
-#define   redPin    A0   
-#define   bluePin   A1  
+#define   inblue    A0   
+#define   inRed     A1  
 #define   enPin     5   // the number of the En pin
 #define   stpPin    6   // the number of the Stp pin
 #define   dirPin    7   // the number of the Dir pin
+
+#define blue_min 760
+#define blue_max 95
  
 /**************************************************************
 ***  connect:
@@ -33,8 +36,8 @@ void setup() {
   pinMode(stpPin, OUTPUT);  digitalWrite(stpPin, LOW);  // initialize the Stp pin as an output
   pinMode(dirPin, OUTPUT);  digitalWrite(dirPin, LOW);  // initialize the Dir pin as an output
 
-  pinMode(redPin, INPUT);
-  pinMode(bluePin, INPUT);
+  //pinMode(redPin, INPUT);
+  pinMode(A0, INPUT);
 }
 
 void loop() {
@@ -80,11 +83,21 @@ void driveStepper()
   }
 }
 
-
+unsigned long duration1, duration2;
 void readInputPins()
 {
-  Serial.print("Red: "); Serial.print(analogRead(redPin));
-  Serial.print(" Blue: "); Serial.print(analogRead(bluePin));
+
+//  Serial.print("Red: "); Serial.print(pulseIn(redPin, HIGH));
+//  Serial.print(" Blue: "); Serial.print(pulseIn(bluePin, HIGH));
+//  Serial.println();
+//  delay(100);
+
+  //Serial.print("A0: "); Serial.print(analogRead(A0));
+  int analogRaw = analogRead(A0);
+  int blue_mapped = constrain(map(analogRaw, blue_min, blue_max, 0, 255), 0, 255);
+   Serial.print("raw: "); Serial.print(analogRaw);
+   Serial.print(" blue_mapped: "); Serial.print(blue_mapped);
+ // Serial.print(" Blue: "); Serial.print(analogRead(bluePin));
   Serial.println();
-  delay(100);
+  delay(10);
 }
