@@ -2,6 +2,9 @@
 
 #include <SoftwareSerial.h>
 #include "Commands.h"
+#include "Crc16.h"
+
+Crc16 crc;  
 // software serial #1: RX = digital pin 10, TX = digital pin 11
 SoftwareSerial DriverPort(10, 11);
 #define DebugPort Serial
@@ -37,7 +40,7 @@ void setup() {
 void loop() {
   //driveStepper();
   readUartDebug();
-  readNeopixel();
+  //readNeopixel();
 }
 
 
